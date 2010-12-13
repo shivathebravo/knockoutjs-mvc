@@ -1,3 +1,11 @@
+v 0.2 (13/12/2010)
+==================
+
+  * Added ko.utils.postJson() example #2 - #4
+  * Added Simple Ajax example #1
+  * Added custom model binder
+  * Added Model classes
+  
 v 0.1 (13/12/2010)
 ==================
 

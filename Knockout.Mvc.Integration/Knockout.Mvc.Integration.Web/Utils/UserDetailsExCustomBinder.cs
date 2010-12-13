@@ -7,6 +7,9 @@ using System.Web.Script.Serialization;
 
 namespace Knockout.Mvc.Integration.Web.Utils
 {
+    /// <summary>
+    /// Custom model binder for UserDetails class
+    /// </summary>
     public class UserDetailsExCustomBinder : DefaultModelBinder
     {
         public static readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
