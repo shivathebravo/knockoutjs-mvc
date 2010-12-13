@@ -1,0 +1,6 @@
+v 0.1 (13/12/2010)
+==================
+
+  * Initial Checkin
+  * Project setup for VS2010 and ASP.NET MVC 3 RC2
+  * Add ko.utils.postJson() example #1

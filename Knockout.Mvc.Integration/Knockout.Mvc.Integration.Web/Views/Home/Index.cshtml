@@ -1,0 +1,42 @@
+﻿@* ========================================================================= *@
+@*                                                                           *@
+@*  M V C   S E R V E R   S I D E   I N T E G R A T I O N   E X A M P L E S  *@
+@*                                                                           *@
+@* ========================================================================= *@
+<h1>Knockout MVC Integration Examples</h1>
+
+@* ========================================================================= *@
+@*                              E X A M P L E   1                            *@
+@* ========================================================================= *@
+<div id="example-1">
+    <h2>ko.util.postJson #1</h2>    
+    <p>The following example makes use of the <code>ko.util.postJSON</code> method to send form data back to the server</p>
+    <p class="server-message">@ViewBag.Example1Message</p>    
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" data-bind="value: firstName"/>
+    </p>        
+    <p>
+        <label for="firstName">Last Name:</label>
+        <input type="text" name="lastName" data-bind="value: lastName"/>
+    </p>        
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" data-bind="value: username"/>
+    </p>   
+    <button data-bind="click: save">Save</button>         
+</div>
+<script type="text/javascript">
+    (function (global) {
+        var ex1 = {
+            firstName: ko.observable(""),
+            lastName: ko.observable(""),
+            username: ko.observable(""),
+            save: function () {
+                ko.utils.postJson('@Url.Action("PostJson")', this);
+            }
+        };
+
+        ko.applyBindings(ex1, $("#example-1").get(0));
+    } (this));
+</script>
