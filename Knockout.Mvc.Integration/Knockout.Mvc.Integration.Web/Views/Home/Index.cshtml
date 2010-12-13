@@ -28,15 +28,236 @@
 </div>
 <script type="text/javascript">
     (function (global) {
-        var ex1 = {
+        var vm = {
             firstName: ko.observable(""),
             lastName: ko.observable(""),
             username: ko.observable(""),
             save: function () {
-                ko.utils.postJson('@Url.Action("PostJson")', this);
+                ko.utils.postJson('@Url.Action("PostJson1")', this);
             }
         };
 
-        ko.applyBindings(ex1, $("#example-1").get(0));
+        ko.applyBindings(vm, $("#example-1").get(0));
+    } (this));
+</script>
+
+@* ========================================================================= *@
+@*                              E X A M P L E   2                            *@
+@* ========================================================================= *@
+<div id="example-2">
+    <h2>ko.util.postJson #2</h2>  
+    <p>
+        The following example makes use of the <code>ko.util.postJSON</code> method to send form data back to the server.
+        Same as the first except it uses a strongly typed argument instad of a FormCollection 
+    </p>
+    <p class="server-message">@ViewBag.Example2Message</p>    
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" data-bind="value: firstName"/>
+    </p>        
+    <p>
+        <label for="firstName">Last Name:</label>
+        <input type="text" name="lastName" data-bind="value: lastName"/>
+    </p>        
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" data-bind="value: username"/>
+    </p>   
+    <button data-bind="click: save">Save</button>         
+</div>
+<script type="text/javascript">
+    (function (global) {
+        var vm = {
+            firstName: ko.observable(""),
+            lastName: ko.observable(""),
+            username: ko.observable(""),
+            save: function () {
+                ko.utils.postJson('@Url.Action("PostJson2")', this);
+            }
+        };
+
+        ko.applyBindings(vm, $("#example-2").get(0));
+    } (this));
+</script>
+
+@* ========================================================================= *@
+@*                              E X A M P L E   3                            *@
+@* ========================================================================= *@
+<div id="example-3">
+    <h2>ko.util.postJson #3</h2>  
+    <p>
+        The following example makes use of the <code>ko.util.postJSON</code> method to send form data back to the server.
+        This illustrates a limitation of the postJson method when dealing with arrays.  When debugging this code you will
+        see the array object is sent as a stringified version of the JavaScript array which doesn't bind correctly.
+    </p>
+    <p>
+        <b>Add more than one skill and observe the returned value count for the skills property.</b>
+    </p>
+    <p class="server-message">@ViewBag.Example3Message</p>    
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" data-bind="value: firstName"/>
+    </p>        
+    <p>
+        <label for="firstName">Last Name:</label>
+        <input type="text" name="lastName" data-bind="value: lastName"/>
+    </p>        
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" data-bind="value: username"/>
+    </p>   
+    <p>
+        <label for="skills">Skills:</label>
+        <input type="text" name="username" data-bind="value: newSkill, valueUpate: 'keypress'"/>
+        <button data-bind="click: addSkill">Add Skill</button>
+        <ul data-bind="template: 'skill-tmpl'"></ul>
+    </p>   
+    <button data-bind="click: save">Save</button>       
+</div>
+<script id="skill-tmpl" type="text/x-jquery-template">
+    {{each skills()}}
+        <li>${this}</li>
+    {{/each}}
+</script>  
+<script type="text/javascript">
+    (function (global) {
+        var vm = {
+            firstName: ko.observable(""),
+            lastName: ko.observable(""),
+            username: ko.observable(""),
+            newSkill: ko.observable(""),
+            skills: ko.observableArray([]),
+            addSkill: function () {
+                var newSkill = this.newSkill();
+                if (newSkill !== "") {
+                    this.skills.push(newSkill);
+                }
+            },
+            save: function () {
+                ko.utils.postJson('@Url.Action("PostJson3")', this);
+            }
+        };
+
+        ko.applyBindings(vm, $("#example-3").get(0));
+    } (this));
+</script>
+
+@* ========================================================================= *@
+@*                              E X A M P L E   4                            *@
+@* ========================================================================= *@
+<div id="example-4">
+    <h2>ko.util.postJson #4</h2>  
+    <p>
+        The following example makes use of the <code>ko.util.postJSON</code> method to send form data back to the server.
+        Same as previous example except resolved using a Custom Model Binder.
+    </p>
+    <p class="server-message">@ViewBag.Example4Message</p>    
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" data-bind="value: firstName"/>
+    </p>        
+    <p>
+        <label for="firstName">Last Name:</label>
+        <input type="text" name="lastName" data-bind="value: lastName"/>
+    </p>        
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" data-bind="value: username"/>
+    </p>   
+    <p>
+        <label for="skills">Skills:</label>
+        <input type="text" name="username" data-bind="value: newSkill, valueUpate: 'keypress'"/>
+        <button data-bind="click: addSkill">Add Skill</button>
+        <ul data-bind="template: 'skill-tmpl'"></ul>
+    </p>   
+    <button data-bind="click: save">Save</button>       
+</div>
+<script type="text/javascript">
+    (function (global) {
+        var vm = {
+            firstName: ko.observable(""),
+            lastName: ko.observable(""),
+            username: ko.observable(""),
+            newSkill: ko.observable(""),
+            skills: ko.observableArray([]),
+            addSkill: function () {
+                var newSkill = this.newSkill();
+                if (newSkill !== "") {
+                    this.skills.push(newSkill);
+                }
+            },
+            save: function () {
+                ko.utils.postJson('@Url.Action("PostJson4")', this);
+            }
+        };
+
+        ko.applyBindings(vm, $("#example-4").get(0));
+    } (this));
+</script>
+
+@* ========================================================================= *@
+@*                              E X A M P L E   5                            *@
+@* ========================================================================= *@
+<div id="example-5">
+    <h2>Simple JSON</h2>  
+    <p>
+        The following example does NOT make use of the <code>ko.util.postJSON</code> method.  Instead it performs a simple ajax
+        request of type 'json'.  This demonstrates that MVC allows this to work "out of the box" for binding to a server side
+        class
+    </p>
+    <p>
+        <b>Add more than one skill and observe the returned value count for the skills property.</b>
+    </p>
+    <p class="server-message"></p>    
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" data-bind="value: firstName"/>
+    </p>        
+    <p>
+        <label for="firstName">Last Name:</label>
+        <input type="text" name="lastName" data-bind="value: lastName"/>
+    </p>        
+    <p>
+        <label for="username">Username:</label>
+        <input type="text" name="username" data-bind="value: username"/>
+    </p>   
+    <p>
+        <label for="skills">Skills:</label>
+        <input type="text" name="username" data-bind="value: newSkill, valueUpate: 'keypress'"/>
+        <button data-bind="click: addSkill">Add Skill</button>
+        <ul data-bind="template: 'skill-tmpl'"></ul>
+    </p>   
+    <button data-bind="click: save">Save</button>       
+</div>
+<script type="text/javascript">
+    (function (global) {
+        var vm = {
+            firstName: ko.observable(""),
+            lastName: ko.observable(""),
+            username: ko.observable(""),
+            newSkill: ko.observable(""),
+            skills: ko.observableArray([]),
+            addSkill: function () {
+                var newSkill = this.newSkill();
+                if (newSkill !== "") {
+                    this.skills.push(newSkill);
+                }
+            },
+            save: function () {
+                var data = ko.toJSON(this);
+                $.ajax({
+                    url:         '@Url.Action("SimpleAjax")',
+                    type:        'post',
+                    contentType: 'application/json',
+                    dataType:    'json',
+                    data:        data,
+                    success: function (result) {
+                        $('#example-5 .server-message').html(result);
+                    }
+                });
+            }
+        };
+
+        ko.applyBindings(vm, $("#example-5").get(0));
     } (this));
 </script>
